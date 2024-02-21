@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
-    <footer>
+    <footer className="h-[1500px]">
       <nav>
         <ul>
           <li>
