@@ -5,17 +5,38 @@ type PageData = {
   attributes: {
     title: string;
     titleDesc: string;
+    product_categories: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+        };
+      }[];
+    };
   };
 };
 
-const IndexPage: React.FC<{ pageData: PageData }> = ({ pageData }) => {
-  return <Hero props={pageData.attributes} />;
+const IndexPage: React.FC<{
+  pageData: PageData;
+}> = ({ pageData }) => {
+  return (
+    <>
+      <Hero props={pageData.attributes} />
+      {pageData.attributes.product_categories.data.map((category) => (
+        <div key={category.id}>
+          <h1>{category.attributes.name}</h1>
+        </div>
+      ))}
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const response = await fetch("http://localhost:1337/api/home-page");
-    const responseData = await response.json();
+    const pageResponse = await fetch(
+      "http://localhost:1337/api/home-page?populate=*"
+    );
+    const responseData = await pageResponse.json();
     const pageData = responseData.data as PageData;
     return {
       props: {

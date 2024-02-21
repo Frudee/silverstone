@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_categories_home_page_categories_home_pages",
+  "info": {
+    "displayName": "categoriesHomePage",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "product_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product-category.product-category"
+    },
+    "categoryImg": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -18,6 +18,12 @@
     },
     "description": {
       "type": "blocks"
+    },
+    "product_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product-category.product-category",
+      "inversedBy": "products"
     }
   }
 }
