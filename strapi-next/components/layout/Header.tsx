@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/logo-sm.svg";
-import MobileMenu from "../mobileMenu/MobileMenu";
+import MobileMenu from "../MobileMenu";
 
 const Header: React.FC = () => {
   return (
