@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { GetServerSideProps } from "next";
 import { Product } from "../types/product";
 import Link from "next/link";
@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const response = await fetch("http://localhost:1337/api/products");
     const responseData = await response.json();
-    const products = responseData.data; 
+    const products = responseData.data;
     return {
       props: {
         products,
