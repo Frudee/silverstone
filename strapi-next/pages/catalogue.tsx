@@ -6,7 +6,7 @@ import GoBackButton from "../components/common/GoBackButton";
 
 const Catalogue: React.FC<{ products: Product[] }> = ({ products }) => {
   return (
-    <div>
+    <div className="h-[1500px]">
       <h1>Catalogue</h1>
       <ul>
         {products.map((product) => (

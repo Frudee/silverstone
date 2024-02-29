@@ -7,7 +7,7 @@ type HeroProps = {
 
 const Hero: React.FC<{ props: HeroProps }> = ({ props }) => {
   return (
-    <div
+    <section
       style={{ backgroundImage: `url(${heroBg.src})` }}
       className={` bg-cover py-[75px] text-white px-4 flex flex-col gap-24 `}
     >
@@ -23,7 +23,7 @@ const Hero: React.FC<{ props: HeroProps }> = ({ props }) => {
         <CTAButton className="w-2/3" text="Узнать больше" />
         <CTAButton className="w-2/3" text="каталог" primary />
       </div>
-    </div>
+    </section>
   );
 };
 
