@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import IndexPage from "../pages";
-import { getStaticProps } from "../pages/index";
+import IndexPage from "../../pages";
+import { getStaticProps } from "../../pages/index";
 import fetchMock from "jest-fetch-mock";
 beforeEach(() => {
   fetchMock.enableMocks();
@@ -42,11 +42,13 @@ describe("IndexPage", () => {
     const description = screen.getByText("Test Description");
     const category1 = screen.getByText("Category 1");
     const category2 = screen.getByText("Category 2");
+
     expect(title).toBeInTheDocument();
     expect(description).toBeInTheDocument();
     expect(category1).toBeInTheDocument();
     expect(category2).toBeInTheDocument();
   });
+
   it('renders "Loading..." when pageData is null', () => {
     render(<IndexPage pageData={null} />);
     const loadingMessage = screen.getByText("Loading...");

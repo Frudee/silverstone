@@ -20,7 +20,7 @@ const IndexPage: React.FC<{
   pageData: IndexPageProps;
 }> = ({ pageData }) => {
   // console.log(pageData);
-  if (pageData === null) {
+  if (!pageData) {
     return <div>Loading...</div>;
   }
   return (
@@ -48,7 +48,6 @@ export const getStaticProps = async () => {
       },
     };
   } catch (error) {
-    console.log(error);
     console.error("Error fetching products:", error);
     throw new Error("Failed to fetch products");
   }
