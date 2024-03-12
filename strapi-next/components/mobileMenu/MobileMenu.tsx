@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import ListItem from "./common/ListItem";
-import logo from "../public/logo-sm.svg";
+import ListItem from "./ListItem";
+import logo from "../../public/logo-sm.svg";
 import Image from "next/image";
 
 /**
@@ -13,7 +12,6 @@ import Image from "next/image";
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
 
   const handleScroll = () => {
     const body = document.querySelector("body");
@@ -45,15 +43,8 @@ const MobileMenu = () => {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      setIsOpen(false);
-      handleScroll();
-    }
-  }, [router.asPath]);
-
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden flex flex-col justify-center">
       <button onClick={toggleMenu} className="">
         <span
           className={`${
@@ -68,7 +59,7 @@ const MobileMenu = () => {
         <span
           className={`${
             isOpen && "transform -rotate-45 -translate-y-1"
-          } block h-[2px] w-7 bg-black mb-1 rounded-lg duration-300`}
+          } block h-[2px] w-7 bg-black rounded-lg duration-300`}
         ></span>
       </button>
       {isOpen && (

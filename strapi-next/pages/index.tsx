@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import Hero from "../components/Hero";
-type PageData = {
+export type IndexPageProps = {
   id: number;
   attributes: {
     title: string;
@@ -14,11 +14,15 @@ type PageData = {
       }[];
     };
   };
-};
+} | null;
 
 const IndexPage: React.FC<{
-  pageData: PageData;
+  pageData: IndexPageProps;
 }> = ({ pageData }) => {
+  // console.log(pageData);
+  if (pageData === null) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <Hero props={pageData.attributes} />
@@ -31,25 +35,22 @@ const IndexPage: React.FC<{
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps = async () => {
   try {
     const pageResponse = await fetch(
       "http://localhost:1337/api/home-page?populate=*"
     );
     const responseData = await pageResponse.json();
-    const pageData = responseData.data as PageData;
+    const pageData = responseData.data as IndexPageProps;
     return {
       props: {
         pageData,
       },
     };
   } catch (error) {
+    console.log(error);
     console.error("Error fetching products:", error);
-    return {
-      props: {
-        pageData: [],
-      },
-    };
+    throw new Error("Failed to fetch products");
   }
 };
 
