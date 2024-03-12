@@ -7,10 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --updateSnapshot"
+    "test": "jest"
   },
   "dependencies": {
-    "@types/aria-query": "^5.0.4",
     "next": "14.1.0",
     "qs": "^6.11.2",
     "react": "^18",
