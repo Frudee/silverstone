@@ -9,19 +9,20 @@ const Hero: React.FC<{ props: HeroProps }> = ({ props }) => {
   return (
     <section
       style={{ backgroundImage: `url(${heroBg.src})` }}
-      className={` bg-cover py-[75px] text-white px-4 flex flex-col gap-24 `}
+      className={` bg-cover lg:bg-center py-[75px] lg:pt-[150px] lg:pb-[200px] text-white px-4 lg:px-[20%] flex flex-col gap-24 `}
     >
-      <div className="flex flex-col gap-[30px]">
-        <h1 className="text-[30px] tracking-wider">
+      <div className="flex flex-col lg:items-center gap-[30px] lg:gap-[45px]">
+        <h1 className="text-[30px] lg:text-[54px] tracking-wider lg:text-center">
           <strong>{props.title}</strong>
         </h1>
         <span className="w-12 block h-[5px] bg-primary"></span>
-        <p className="text-sm tracking-wide leading-6">{props.titleDesc}</p>
-      </div>
-
-      <div className="flex flex-col gap-4 items-center">
-        <CTAButton className="w-2/3" text="Узнать больше" />
-        <CTAButton className="w-2/3" text="каталог" primary />
+        <p className="text-sm lg:text-lg lg:max-w-[780px] tracking-wide leading-6 lg:text-center">
+          {props.titleDesc}
+        </p>
+        <div className="flex flex-col lg:flex-row lg:justify-center w-full gap-4 items-center">
+          <CTAButton className="w-full lg:w-1/3" text="Узнать больше" />
+          <CTAButton className="w-full lg:w-1/3" text="каталог" primary />
+        </div>
       </div>
     </section>
   );

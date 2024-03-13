@@ -7,7 +7,7 @@ import MobileMenu from "../mobileMenu/MobileMenu";
 const Header: React.FC = () => {
   return (
     <header>
-      <nav className="py-3 px-4 flex justify-between relative items-center">
+      <nav className="py-3 px-4 lg:px-[20%] flex justify-between relative items-center">
         <Image src={logo} alt="logo" height={50} />
         <MobileMenu />
       </nav>
