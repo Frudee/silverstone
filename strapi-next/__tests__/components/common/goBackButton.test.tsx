@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import GoBackButton from "../../components/common/GoBackButton";
+import GoBackButton from "../../../components/common/GoBackButton";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useRouter } from "next/router";
 

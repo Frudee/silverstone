@@ -1,17 +1,11 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEvent } from "react";
 import MobileMenuNavBar from "./MobileMenuNavBar";
 import logo from "../../public/logo-sm.svg";
 import Image from "next/image";
 import MenuHamburger from "./MenuHamburger";
 
-/**
- * Defines a mobile menu component with toggle and scroll handling functionality and useEffect for handling window resize.
- *
- * @returns {JSX.Element} The mobile menu component
- */
-
-const MobileMenu = () => {
+const MobileMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleScroll = () => {
@@ -21,9 +15,17 @@ const MobileMenu = () => {
     }
   };
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    handleScroll();
+  const toggleMenu = (event: MouseEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement;
+    if (
+      target.tagName === "LI" ||
+      target.tagName === "BUTTON" ||
+      target.tagName === "A" ||
+      target.tagName === "SPAN"
+    ) {
+      setIsOpen(!isOpen);
+      handleScroll();
+    }
   };
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const MobileMenu = () => {
         <div className="absolute top-[74.22px] flex flex-col right-0 bg-gray-100 p-4 w-screen h-[calc(100vh-74.22px)]">
           <MobileMenuNavBar toggleMenu={toggleMenu} />
           <div className="mt-auto flex-shrink-0">
-            <Link href="/" onClick={toggleMenu}>
+            <Link href="/">
               <Image src={logo} alt="logo" width={50} height={50} priority />
             </Link>
           </div>

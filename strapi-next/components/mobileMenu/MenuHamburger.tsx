@@ -1,6 +1,10 @@
 export interface MenuHamburgerProps {
   isOpen: boolean;
-  toggleMenu: () => void;
+  toggleMenu: (
+    event:
+      | React.MouseEvent<HTMLUListElement>
+      | React.MouseEvent<HTMLButtonElement>
+  ) => void;
 }
 
 const MenuHamburger: React.FC<MenuHamburgerProps> = ({
