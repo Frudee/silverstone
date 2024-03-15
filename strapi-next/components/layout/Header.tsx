@@ -15,7 +15,7 @@ const Header: React.FC = () => {
         <DesktopMenu />
         <div className="hidden lg:flex flex-col min-w-fit max-w-fit lg:ml-auto">
           <span>+7 (495) 123-45-67</span>
-          <span className="text-xs">г. Челябинск</span>
+          <span className="text-xs leading-3">г. Челябинск</span>
         </div>
       </nav>
     </header>

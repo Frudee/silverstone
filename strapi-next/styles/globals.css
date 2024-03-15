@@ -5,3 +5,18 @@
 html {
   font-family: "Montserrat";
 }
+
+.slide-in-bar:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 0;
+  height: 4px;
+  background-color: #008bd1;
+  transition: width 0.3s ease;
+}
+
+.slide-in-bar:hover:before {
+  width: 100%;
+}
