@@ -1,19 +1,21 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/logo-sm.svg";
+import logoSM from "../../public/logo-sm.svg";
+import logo from "../../public/logo.svg";
 import MobileMenu from "../mobileMenu/MobileMenu";
-import DesktopMenu from "../DesktopMenu";
+import DesktopMenu from "../desktopMenu/DesktopMenu";
 
 const Header: React.FC = () => {
   return (
     <header>
-      <nav className="py-3 px-4 lg:px-[20%] flex justify-between lg:justify-normal relative items-center">
-        <Image src={logo} alt="logo" height={50} />
+      <nav className="py-6 px-4 lg:px-[10%] xl:px-[20%] flex lg:flex-wrap justify-between lg:justify-normal relative items-center">
+        <Image className="lg:hidden" src={logoSM} alt="logo" height={50} />
+        <Image className="hidden lg:block" src={logo} alt="logo" height={50} />
         <MobileMenu />
         <DesktopMenu />
-        <div className="hidden lg:block lg:ml-auto">
+        <div className="hidden lg:flex flex-col min-w-fit max-w-fit lg:ml-auto">
           <span>+7 (495) 123-45-67</span>
+          <span className="text-xs">г. Челябинск</span>
         </div>
       </nav>
     </header>
