@@ -15,8 +15,8 @@ const CTAButton: React.FC<CTAButtonProps> = ({
   return (
     <button
       className={`${
-        primary ? "bg-primary" : "bg-secondary"
-      } text-white px-4 py-2 rounded-sm text-sm uppercase tracking-wide  ${className}`}
+        primary ? "bg-primary border-primary" : "bg-secondary border-secondary"
+      } text-white border px-4 py-3 rounded-sm text-sm uppercase tracking-wide hover:bg-transparent duration-150 ${className}`}
       {...props}
     >
       {text}
