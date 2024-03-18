@@ -1,12 +1,13 @@
 import Link from "next/link";
-import React, { useState, useEffect, MouseEvent } from "react";
+import React, { MouseEvent } from "react";
 import MobileMenuNavBar from "./MobileMenuNavBar";
 import logo from "../../public/logo-sm.svg";
 import Image from "next/image";
 import MenuHamburger from "./MenuHamburger";
+import { useAutoCloseMenu } from "../../utils/hooks";
 
 const MobileMenu: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useAutoCloseMenu();
 
   const handleScroll = () => {
     const body = document.querySelector("body");
@@ -27,24 +28,6 @@ const MobileMenu: React.FC = () => {
       handleScroll();
     }
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      const body = document.querySelector("body");
-      if (body) {
-        if (window.innerWidth > 1024) {
-          body.style.overflow = "auto";
-          setIsOpen(false);
-        }
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isOpen]);
 
   return (
     <div className="lg:hidden flex flex-col justify-center">
