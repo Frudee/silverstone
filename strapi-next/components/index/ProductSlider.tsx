@@ -1,29 +1,19 @@
 import Image from "next/image";
+import { category } from "../../pages";
 
 type ProductSliderProps = {
-  attributes: {
-    image: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      } | null;
-    };
-    name: string;
-    description: string;
-  }[];
+  data: category[];
 };
 
-const ProductSlider: React.FC<ProductSliderProps> = ({ attributes }) => {
-  //   console.log(data);
+const ProductSlider: React.FC<ProductSliderProps> = ({ data }) => {
   return (
     <div>
-      {attributes.map((category, i) => (
+      {data.map((category, i) => (
         <div key={i}>
-          <h4>{category.name}</h4>
-          <span>{category.description}</span>
+          <h4>{category.attributes.name}</h4>
+          <span>{category.attributes.description}</span>
           <Image
-            src={`http://localhost:1337${category.image.data?.attributes.url!}`}
+            src={`http://localhost:1337${category.attributes.image.data?.attributes.url}`}
             alt="image"
             width={500}
             height={500}

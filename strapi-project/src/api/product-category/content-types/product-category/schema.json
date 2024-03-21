@@ -17,12 +17,6 @@
       "required": true,
       "unique": true
     },
-    "products": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::product.product",
-      "mappedBy": "product_category"
-    },
     "image": {
       "allowedTypes": [
         "images",

@@ -3,22 +3,22 @@ import ProductSlider from "../components/index/ProductSlider";
 import { gql } from "@apollo/client";
 import createApolloClient from "../apollo-client";
 
-// type test
+export type category = {
+  attributes: {
+    image: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      } | null;
+    };
+    name: string;
+    description: string | null;
+  };
+};
 export type IndexPageProps = {
   productCategories: {
-    data: {
-      attributes: {
-        image: {
-          data: {
-            attributes: {
-              url: string;
-            };
-          } | null;
-        };
-        name: string;
-        description: string | null;
-      };
-    }[];
+    data: category[];
   };
   homePage: {
     data: {
@@ -33,14 +33,13 @@ export type IndexPageProps = {
 const IndexPage: React.FC<{
   pageData: IndexPageProps;
 }> = ({ pageData }) => {
-  console.log(pageData?.productCategories.data);
   if (!pageData) {
     return <div>Loading...</div>;
   }
   return (
     <>
       <Hero props={pageData.homePage.data.attributes} />
-      <ProductSlider attributes={pageData.productCategories.data} />
+      <ProductSlider data={pageData.productCategories.data} />
     </>
   );
 };
