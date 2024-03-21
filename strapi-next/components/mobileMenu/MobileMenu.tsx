@@ -33,7 +33,7 @@ const MobileMenu: React.FC = () => {
     <div className="lg:hidden flex flex-col justify-center">
       <MenuHamburger isOpen={isOpen} toggleMenu={toggleMenu} />
       {isOpen && (
-        <div className="absolute top-[74.22px] flex flex-col right-0 bg-gray-100 p-4 w-screen h-[calc(100vh-74.22px)]">
+        <div className="absolute top-[98.22px] flex flex-col right-0 bg-gray-100 p-4 w-screen h-[calc(100vh-98.22px)]">
           <MobileMenuNavBar toggleMenu={toggleMenu} />
           <div className="mt-auto flex-shrink-0">
             <Link href="/">
