@@ -1,5 +1,5 @@
-import { GetStaticProps } from "next";
-import Hero from "../components/Hero";
+import Hero from "../components/index/Hero";
+import ProductSlider from "../components/index/ProductSlider";
 export type IndexPageProps = {
   id: number;
   attributes: {
@@ -10,6 +10,8 @@ export type IndexPageProps = {
         id: number;
         attributes: {
           name: string;
+          image: any;
+          description: string;
         };
       }[];
     };
@@ -19,18 +21,15 @@ export type IndexPageProps = {
 const IndexPage: React.FC<{
   pageData: IndexPageProps;
 }> = ({ pageData }) => {
-  // console.log(pageData);
   if (!pageData) {
     return <div>Loading...</div>;
   }
   return (
     <>
       <Hero props={pageData.attributes} />
-      {pageData.attributes.product_categories.data.map((category) => (
-        <div key={category.id}>
-          <h1>{category.attributes.name}</h1>
-        </div>
-      ))}
+      <ProductSlider
+        product_categories={pageData.attributes.product_categories}
+      />
     </>
   );
 };

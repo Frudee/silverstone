@@ -1,5 +1,5 @@
-import heroBg from "../public/hero-bg.png";
-import CTAButton from "../components/common/CTAButton";
+import heroBg from "../../public/hero-bg.png";
+import CTAButton from "../common/CTAButton";
 type HeroProps = {
   title: string;
   titleDesc: string;
