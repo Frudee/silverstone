@@ -1,19 +1,31 @@
 import Hero from "../components/index/Hero";
 import ProductSlider from "../components/index/ProductSlider";
+import { gql } from "@apollo/client";
+import createApolloClient from "../apollo-client";
+
+// type test
 export type IndexPageProps = {
-  id: number;
-  attributes: {
-    title: string;
-    titleDesc: string;
-    product_categories: {
-      data: {
-        id: number;
-        attributes: {
-          name: string;
-          image: any;
-          description: string;
+  productCategories: {
+    data: {
+      attributes: {
+        image: {
+          data: {
+            attributes: {
+              url: string;
+            };
+          } | null;
         };
-      }[];
+        name: string;
+        description: string | null;
+      };
+    }[];
+  };
+  homePage: {
+    data: {
+      attributes: {
+        title: string;
+        titleDesc: string;
+      };
     };
   };
 } | null;
@@ -21,29 +33,54 @@ export type IndexPageProps = {
 const IndexPage: React.FC<{
   pageData: IndexPageProps;
 }> = ({ pageData }) => {
+  console.log(pageData?.productCategories.data);
   if (!pageData) {
     return <div>Loading...</div>;
   }
   return (
     <>
-      <Hero props={pageData.attributes} />
-      <ProductSlider
-        product_categories={pageData.attributes.product_categories}
-      />
+      <Hero props={pageData.homePage.data.attributes} />
+      <ProductSlider attributes={pageData.productCategories.data} />
     </>
   );
 };
 
 export const getStaticProps = async () => {
+  const client = createApolloClient();
   try {
-    const pageResponse = await fetch(
-      "http://localhost:1337/api/home-page?populate=*"
-    );
-    const responseData = await pageResponse.json();
-    const pageData = responseData.data as IndexPageProps;
+    const { data } = await client.query({
+      query: gql`
+        query ExampleQuery {
+          productCategories {
+            data {
+              attributes {
+                image {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+                name
+                description
+              }
+            }
+          }
+          homePage {
+            data {
+              attributes {
+                title
+                titleDesc
+              }
+            }
+          }
+        }
+      `,
+    });
+    // console.log(data);
     return {
       props: {
-        pageData,
+        pageData: data,
       },
     };
   } catch (error) {
@@ -51,5 +88,22 @@ export const getStaticProps = async () => {
     throw new Error("Failed to fetch products");
   }
 };
+// export const getStaticProps = async () => {
+//   try {
+//     const pageResponse = await fetch(
+//       "http://localhost:1337/api/home-page?populate=*"
+//     );
+//     const responseData = await pageResponse.json();
+//     const pageData = responseData.data as IndexPageProps;
+//     return {
+//       props: {
+//         pageData,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Error fetching products:", error);
+//     throw new Error("Failed to fetch products");
+//   }
+// };
 
 export default IndexPage;
