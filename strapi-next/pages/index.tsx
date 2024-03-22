@@ -37,10 +37,10 @@ const IndexPage: React.FC<{
     return <div>Loading...</div>;
   }
   return (
-    <>
+    <main>
       <Hero props={pageData.homePage.data.attributes} />
       <ProductSlider data={pageData.productCategories.data} />
-    </>
+    </main>
   );
 };
 
