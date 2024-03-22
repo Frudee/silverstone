@@ -1,16 +1,16 @@
-import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
-import { category } from "../../pages";
+import { Category } from "../../pages";
 import "swiper/css";
 import "swiper/css/pagination";
 import Heading from "../common/Heading";
+import ProductSliderItem from "./ProductSliderItem";
 
 SwiperCore.use([Pagination, Autoplay]);
 
-type ProductSliderProps = {
-  data: category[];
+export type ProductSliderProps = {
+  data: Category[];
 };
 
 const ProductSlider: React.FC<ProductSliderProps> = ({ data }) => {
@@ -25,19 +25,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ data }) => {
       >
         {data.map((category, i) => (
           <SwiperSlide key={i}>
-            <div className="flex flex-col py-[40px]">
-              <Image
-                src={`http://localhost:1337${category.attributes.image.data?.attributes.url}`}
-                alt="image"
-                width={300}
-                height={300}
-                className="w-full max-w-[500px]"
-              />
-              <div>
-                <h4>{category.attributes.name}</h4>
-                <span>{category.attributes.description}</span>
-              </div>
-            </div>
+            <ProductSliderItem props={category} />
           </SwiperSlide>
         ))}
       </Swiper>

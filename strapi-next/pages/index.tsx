@@ -3,7 +3,7 @@ import ProductSlider from "../components/index/ProductSlider";
 import { gql } from "@apollo/client";
 import createApolloClient from "../apollo-client";
 
-export type category = {
+export type Category = {
   attributes: {
     image: {
       data: {
@@ -18,7 +18,7 @@ export type category = {
 };
 export type IndexPageProps = {
   productCategories: {
-    data: category[];
+    data: Category[];
   };
   homePage: {
     data: {

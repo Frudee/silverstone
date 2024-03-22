@@ -419,7 +419,11 @@ export interface ApiProductCategoryProductCategory
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
     image: Attribute.Media & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
+    description: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
