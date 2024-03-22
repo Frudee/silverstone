@@ -2,10 +2,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Category } from "../../pages";
-import "swiper/css";
-import "swiper/css/pagination";
 import Heading from "../common/Heading";
 import ProductSliderItem from "./ProductSliderItem";
+import "swiper/css";
+import "swiper/css/pagination";
 
 SwiperCore.use([Pagination, Autoplay]);
 
