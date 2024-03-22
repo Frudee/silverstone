@@ -418,8 +418,8 @@ export interface ApiProductCategoryProductCategory
   };
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
-    image: Attribute.Media;
-    description: Attribute.Text;
+    image: Attribute.Media & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
