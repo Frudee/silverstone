@@ -5,6 +5,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import { category } from "../../pages";
 import "swiper/css";
 import "swiper/css/pagination";
+import Heading from "../common/Heading";
 
 SwiperCore.use([Pagination, Autoplay]);
 
@@ -15,7 +16,7 @@ type ProductSliderProps = {
 const ProductSlider: React.FC<ProductSliderProps> = ({ data }) => {
   return (
     <section className="px-4 py-[75px]">
-      <h2 className="text-4xl font-semibold">Продукция</h2>
+      <Heading text="Продукция" pageHeading={false} />
       <Swiper
         spaceBetween={30}
         slidesPerView={1}

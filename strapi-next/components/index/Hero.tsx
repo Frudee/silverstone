@@ -1,5 +1,6 @@
 import heroBg from "../../public/hero-bg.png";
 import CTAButton from "../common/CTAButton";
+import Divider from "../common/Divider";
 type HeroProps = {
   title: string;
   titleDesc: string;
@@ -15,7 +16,7 @@ const Hero: React.FC<{ props: HeroProps }> = ({ props }) => {
         <h1 className="text-[30px] lg:text-[54px] tracking-wider lg:text-center">
           <strong>{props.title}</strong>
         </h1>
-        <span className="w-12 block h-[5px] bg-primary"></span>
+        <Divider />
         <p className="text-sm lg:text-lg lg:max-w-[780px] tracking-wide leading-6 lg:text-center">
           {props.titleDesc}
         </p>
