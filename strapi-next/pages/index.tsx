@@ -76,7 +76,6 @@ export const getStaticProps = async () => {
         }
       `,
     });
-    // console.log(data);
     return {
       props: {
         pageData: data,
@@ -87,22 +86,5 @@ export const getStaticProps = async () => {
     throw new Error("Failed to fetch products");
   }
 };
-// export const getStaticProps = async () => {
-//   try {
-//     const pageResponse = await fetch(
-//       "http://localhost:1337/api/home-page?populate=*"
-//     );
-//     const responseData = await pageResponse.json();
-//     const pageData = responseData.data as IndexPageProps;
-//     return {
-//       props: {
-//         pageData,
-//       },
-//     };
-//   } catch (error) {
-//     console.error("Error fetching products:", error);
-//     throw new Error("Failed to fetch products");
-//   }
-// };
 
 export default IndexPage;

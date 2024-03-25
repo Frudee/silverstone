@@ -1,16 +1,25 @@
-export interface Product {
-  id: number;
+export type Product = {
   attributes: {
-    name: string;
-    description: Array<{
+    characteristics: {
       type: string;
-      children: Array<{
+      format: string;
+      children: {
         type: string;
-        text: string;
-      }>;
-    }>;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
+        children: {
+          type: string;
+          text: string;
+        }[];
+      }[];
+    }[];
+    description: string;
+    image: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
+    name: string;
   };
-}
+  id: string;
+};

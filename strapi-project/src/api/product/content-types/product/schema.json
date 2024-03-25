@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "product_categories",
+  "collectionName": "products",
   "info": {
-    "singularName": "product-category",
-    "pluralName": "product-categories",
-    "displayName": "Product Category",
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
     "description": ""
   },
   "options": {
@@ -14,8 +14,7 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
     },
     "image": {
       "type": "media",
@@ -28,15 +27,17 @@
         "audios"
       ]
     },
-    "description": {
-      "type": "text",
-      "required": true,
-      "maxLength": 255
+    "characteristics": {
+      "type": "blocks",
+      "required": true
     },
-    "products": {
+    "product_categories": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::product.product"
+      "target": "api::product-category.product-category"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

@@ -1,8 +1,9 @@
 import React from "react";
-import { GetServerSideProps } from "next";
 import { Product } from "../types/product";
 import Link from "next/link";
 import GoBackButton from "../components/common/GoBackButton";
+import createApolloClient from "../apollo-client";
+import { gql } from "@apollo/client";
 
 const Catalogue: React.FC<{ products: Product[] | null }> = ({ products }) => {
   return (
@@ -27,13 +28,34 @@ const Catalogue: React.FC<{ products: Product[] | null }> = ({ products }) => {
 };
 
 export const getServerSideProps = async () => {
+  const client = createApolloClient();
   try {
-    const response = await fetch("http://localhost:1337/api/products");
-    const responseData = await response.json();
-    const products = responseData.data as Product[];
+    const { data } = await client.query({
+      query: gql`
+        query ExampleQuery {
+          products {
+            data {
+              attributes {
+                description
+                image {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+                name
+                characteristics
+              }
+              id
+            }
+          }
+        }
+      `,
+    });
     return {
       props: {
-        products,
+        products: data.products.data,
       },
     };
   } catch (error) {

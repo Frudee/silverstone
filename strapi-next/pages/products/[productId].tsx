@@ -1,44 +1,57 @@
 import React from "react";
 import { GetServerSideProps } from "next";
-import qs from "qs";
+import { gql } from "@apollo/client";
 import { Product } from "../../types/product";
 import GoBackButton from "../../components/common/GoBackButton";
+import createApolloClient from "../../apollo-client";
+import Image from "next/image";
 
 const getProductByQuery = async (id: string): Promise<Product> => {
-  const query = qs.stringify(
-    {
-      filters: {
-        id: {
-          $eq: id,
-        },
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  );
+  const client = createApolloClient();
 
-  const response = await fetch(`http://localhost:1337/api/products?${query}`);
-  const responseData = await response.json();
-  const productData = responseData.data[0];
-  return productData;
+  const { data } = await client.query({
+    query: gql`
+      query ProductQuery($productId: ID) {
+        product(id: $productId) {
+          data {
+            attributes {
+              characteristics
+              description
+              image {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+              name
+            }
+            id
+          }
+        }
+      }
+    `,
+    variables: {
+      productId: id,
+    },
+  });
+  console.log(data);
+  const product: Product = data.product.data;
+  return product;
 };
 
 const ProductPage: React.FC<{ product: Product }> = ({ product }) => {
+  const { name, image, description } = product.attributes;
   return (
     <div className="w-1/2 m-auto">
-      <h1>{product.attributes.name}</h1>
-      {product.attributes.description.map((desc, index) => {
-        if (desc.type === "paragraph") {
-          return (
-            <p key={index}>
-              {desc.children.map((child) => child.text).join("")}
-            </p>
-          );
-        } else {
-          return null; // Handle other types if needed
-        }
-      })}
+      <h1>{name}</h1>
+      <Image
+        src={`http://localhost:1337${image.data?.attributes.url}`}
+        alt="product image"
+        width={300}
+        height={200}
+      />
+      <p>{description}</p>
       <GoBackButton />
     </div>
   );
