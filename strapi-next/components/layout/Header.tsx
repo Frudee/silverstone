@@ -4,6 +4,7 @@ import logoSM from "../../public/logo-sm.svg";
 import logo from "../../public/logo.svg";
 import MobileMenu from "../mobileMenu/MobileMenu";
 import DesktopMenu from "../desktopMenu/DesktopMenu";
+import Breadcrumbs from "../common/Breadcrumbs";
 
 const Header: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const Header: React.FC = () => {
           <span className="text-xs leading-3">г. Челябинск</span>
         </div>
       </nav>
+      <Breadcrumbs />
     </header>
   );
 };

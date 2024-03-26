@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import { gql } from "@apollo/client";
-import { Product } from "../../types/product";
-import GoBackButton from "../../components/common/GoBackButton";
-import createApolloClient from "../../apollo-client";
+import { Product } from "../../../types/product";
+import GoBackButton from "../../../components/common/GoBackButton";
+import createApolloClient from "../../../apollo-client";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
-const getProductByQuery = async (id: string): Promise<Product> => {
+const getProductByQuery = async (id: any): Promise<Product> => {
   const client = createApolloClient();
 
   const { data } = await client.query({
@@ -35,13 +36,18 @@ const getProductByQuery = async (id: string): Promise<Product> => {
       productId: id,
     },
   });
-  console.log(data);
+  // console.log(data);
   const product: Product = data.product.data;
   return product;
 };
 
 const ProductPage: React.FC<{ product: Product }> = ({ product }) => {
   const { name, image, description } = product.attributes;
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   router.replace(`/products/${name}`, undefined, { shallow: true });
+  // }, [product]);
   return (
     <div className="w-1/2 m-auto">
       <h1>{name}</h1>
@@ -58,7 +64,8 @@ const ProductPage: React.FC<{ product: Product }> = ({ product }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const productId = context.params?.productId as string;
+  const productId = context.params?.productId;
+  console.log(typeof productId);
   const product = await getProductByQuery(productId);
   return {
     props: {

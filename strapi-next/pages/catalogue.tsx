@@ -15,7 +15,7 @@ const Catalogue: React.FC<{ products: Product[] | null }> = ({ products }) => {
         ) : (
           products.map((product) => (
             <li key={product.id}>
-              <Link href={`/products/${product.id}`}>
+              <Link href={`/catalogue/${product.id}`}>
                 {product.attributes.name}
               </Link>
             </li>
