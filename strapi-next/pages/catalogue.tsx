@@ -1,26 +1,25 @@
 import React from "react";
-import { Product } from "../types/product";
 import Link from "next/link";
 import GoBackButton from "../components/common/GoBackButton";
 import createApolloClient from "../apollo-client";
 import { gql } from "@apollo/client";
 
-const Catalogue: React.FC<{ products: Product[] | null }> = ({ products }) => {
+const Catalogue: React.FC<{ productCategories: any }> = ({
+  productCategories,
+}) => {
   return (
     <div className="h-[1500px]">
       <h1>Catalogue</h1>
       <ul>
-        {!products ? (
-          <div>No products found</div>
-        ) : (
-          products.map((product) => (
-            <li key={product.id}>
-              <Link href={`/catalogue/${product.id}`}>
-                {product.attributes.name}
-              </Link>
-            </li>
-          ))
-        )}
+        {productCategories.map((category: any) => (
+          <li key={category.attributes.name}>
+            <Link
+              href={`/catalogue/${category.attributes.name}-${category.id}`}
+            >
+              {category.attributes.name}
+            </Link>
+          </li>
+        ))}
       </ul>
       <GoBackButton />
     </div>
@@ -32,11 +31,10 @@ export const getServerSideProps = async () => {
   try {
     const { data } = await client.query({
       query: gql`
-        query ExampleQuery {
-          products {
+        query ProductCategories {
+          productCategories {
             data {
               attributes {
-                description
                 image {
                   data {
                     attributes {
@@ -45,7 +43,6 @@ export const getServerSideProps = async () => {
                   }
                 }
                 name
-                characteristics
               }
               id
             }
@@ -55,7 +52,7 @@ export const getServerSideProps = async () => {
     });
     return {
       props: {
-        products: data.products.data,
+        productCategories: data.productCategories.data,
       },
     };
   } catch (error) {
