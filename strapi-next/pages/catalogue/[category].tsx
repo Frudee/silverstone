@@ -51,7 +51,6 @@ const getCategoryByQuery = async (id: string): Promise<any> => {
         },
       },
     });
-    // console.log(data);
     const category: Category = data.productCategory.data.attributes;
     const products: Product[] = data.products.data;
     return { category, products };
@@ -60,11 +59,11 @@ const getCategoryByQuery = async (id: string): Promise<any> => {
   }
 };
 
-const CategoryPage: React.FC<{ category: Category; products: Product[] }> = ({
-  category,
-  products,
-}) => {
-  console.log(products);
+const CategoryPage: React.FC<{
+  category: Category;
+  products: Product[];
+  categoryId: string;
+}> = ({ category, products, categoryId }) => {
   return (
     <section>
       <div className="flex flex-col w-1/3">
@@ -84,7 +83,9 @@ const CategoryPage: React.FC<{ category: Category; products: Product[] }> = ({
         <ul>
           {products?.map((product: Product) => (
             <li key={product.attributes.name}>
-              <Link href={`/catalogue/${category?.name}/${product.id}`}>
+              <Link
+                href={`/catalogue/${category?.name}-${categoryId}/${product.id}`}
+              >
                 {product.attributes.name}
               </Link>
               <span>{product.attributes.description}</span>
@@ -102,11 +103,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const params = context.params?.category as string;
   const categoryId = params?.split("-").pop() as string;
   const data = await getCategoryByQuery(categoryId);
-  console.log(data);
   return {
     props: {
       category: data.category,
       products: data.products,
+      categoryId: categoryId,
     },
   };
 };

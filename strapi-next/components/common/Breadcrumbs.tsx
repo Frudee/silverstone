@@ -18,8 +18,6 @@ const Breadcrumbs: React.FC = () => {
     text: "Главная",
   });
 
-  console.log(router);
-
   if (crumbs.length <= 1) {
     return null;
   }
