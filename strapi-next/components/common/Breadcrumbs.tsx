@@ -5,6 +5,7 @@ import { getCategoryBySlug } from "../../graphql/queries/category/getCategoryByS
 import { getProductBySlug } from "../../graphql/queries/product/getProductBySlug";
 import Category from "../../types/category";
 import Product from "../../types/product";
+import pageMappings from "../../utils/pageMappings";
 
 interface Breadcrumb {
   text: string;
@@ -33,11 +34,11 @@ const Breadcrumbs: React.FC = () => {
     pathSegments.length === 2 && pathSegments.splice(-1);
 
     const resultArray: Breadcrumb[] = pathSegments.map((segment, index) => {
-      const previousSegment = index > 0 ? pathSegments[index - 1] : ""; // Get the previous segment
+      const previousSegment = index > 0 ? pathSegments[index - 1] : "";
       const href = `/${segment}${
         previousSegment !== "" ? "/" + previousSegment : ""
       }`;
-      return { text: segment, href: href };
+      return { text: pageMappings[segment] || segment, href: href };
     });
 
     Promise.all(promises).then((data) => {
