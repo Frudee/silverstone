@@ -846,6 +846,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'api::product-category.product-category'
     >;
     description: Attribute.Text;
+    slug: Attribute.UID<'api::product.product', 'name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -889,6 +890,7 @@ export interface ApiProductCategoryProductCategory
       'oneToMany',
       'api::product.product'
     >;
+    slug: Attribute.UID<'api::product-category.product-category', 'name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

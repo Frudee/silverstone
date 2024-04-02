@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { decodeAndSplit } from "../../utils/utils";
 
 type BreadcrumbItemProps = {
   text: string;
@@ -13,13 +12,15 @@ const BreadcrumbItem: React.FC<BreadcrumbItemProps> = ({
   last,
 }) => {
   if (last) {
-    return <span className="text-gray-200">{decodeAndSplit(text)}</span>;
+    return <span className="text-gray-200 text-xs">{text}</span>;
   }
 
   return (
-    <li className="flex gap-4">
-      <Link href={href}>{decodeAndSplit(text)}</Link>
-      <span>/</span>
+    <li className="flex gap-1">
+      <Link href={href} className="text-xs">
+        {text}
+      </Link>
+      <span className="text-xs">&gt;</span>
     </li>
   );
 };

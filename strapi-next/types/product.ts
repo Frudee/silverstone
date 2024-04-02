@@ -1,4 +1,4 @@
-export type Product = {
+type Product = {
   attributes: {
     characteristics: {
       type: string;
@@ -12,6 +12,15 @@ export type Product = {
       }[];
     }[];
     description: string;
+    slug: string;
+    product_categories: {
+      data: {
+        attributes: {
+          name: string;
+          slug: string;
+        };
+      }[];
+    };
     image: {
       data: {
         attributes: {
@@ -23,3 +32,5 @@ export type Product = {
   };
   id: string;
 };
+
+export default Product;

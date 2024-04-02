@@ -4,18 +4,18 @@ import { GetServerSideProps } from "next";
 import Category from "../../types/category";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../../types/product";
+import Product from "../../types/product";
 
-const getCategoryByQuery = async (id: string): Promise<any> => {
+const getCategoryByQuery = async (categorySlug: string): Promise<any> => {
   const client = createApolloClient();
   try {
     const { data } = await client.query({
       query: gql`
         query ProductCategories(
-          $productCategoryId: ID
-          $filters: ProductFiltersInput
+          $filters: ProductCategoryFiltersInput
+          $productsFilters: ProductFiltersInput
         ) {
-          productCategory(id: $productCategoryId) {
+          productCategories(filters: $filters) {
             data {
               attributes {
                 name
@@ -27,13 +27,15 @@ const getCategoryByQuery = async (id: string): Promise<any> => {
                   }
                 }
                 description
+                slug
               }
             }
           }
-          products(filters: $filters) {
+          products(filters: $productsFilters) {
             data {
               attributes {
                 name
+                slug
               }
               id
             }
@@ -41,17 +43,21 @@ const getCategoryByQuery = async (id: string): Promise<any> => {
         }
       `,
       variables: {
-        productCategoryId: id,
         filters: {
+          slug: {
+            eq: categorySlug,
+          },
+        },
+        productsFilters: {
           product_categories: {
-            id: {
-              eq: id,
+            slug: {
+              eq: categorySlug,
             },
           },
         },
       },
     });
-    const category: Category = data.productCategory.data.attributes;
+    const category: Category = data.productCategories.data[0];
     const products: Product[] = data.products.data;
     return { category, products };
   } catch (err) {
@@ -62,30 +68,27 @@ const getCategoryByQuery = async (id: string): Promise<any> => {
 const CategoryPage: React.FC<{
   category: Category;
   products: Product[];
-  categoryId: string;
-}> = ({ category, products, categoryId }) => {
+}> = ({ category, products }) => {
+  const { name, image, description, slug } = category?.attributes;
   return (
     <section>
       <div className="flex flex-col w-1/3">
         <span className="text-3xl">КАТЕГОРИЯ</span>
-        <h1>{category?.name}</h1>
-        <span>{category?.description}</span>
+        <h1>{name}</h1>
+        <span>{description}</span>
         <Image
-          src={`http://localhost:1337${category?.image.data.attributes.url}`}
+          src={`http://localhost:1337${image.data.attributes.url}`}
           alt="category image"
           width={300}
           height={200}
         />
-        <Link href={`/catalogue/${category?.name}/`}>Ссылка на продукт</Link>
       </div>
       <div>
         <span className="text-3xl">Продукты</span>
         <ul>
           {products?.map((product: Product) => (
             <li key={product.attributes.name}>
-              <Link
-                href={`/catalogue/${category?.name}-${categoryId}/${product.id}`}
-              >
+              <Link href={`/catalogue/${slug}/${product.attributes.slug}`}>
                 {product.attributes.name}
               </Link>
               <span>{product.attributes.description}</span>
@@ -100,14 +103,13 @@ const CategoryPage: React.FC<{
 export default CategoryPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const params = context.params?.category as string;
-  const categoryId = params?.split("-").pop() as string;
-  const data = await getCategoryByQuery(categoryId);
+  const categorySlug = context.params?.categorySlug as string;
+  const data = await getCategoryByQuery(categorySlug);
   return {
     props: {
       category: data.category,
       products: data.products,
-      categoryId: categoryId,
+      // categoryId: categoryId,
     },
   };
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import logoSM from "../../public/logo-sm.svg";
 import logo from "../../public/logo.svg";

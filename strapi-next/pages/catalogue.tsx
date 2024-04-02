@@ -3,20 +3,19 @@ import Link from "next/link";
 import GoBackButton from "../components/common/GoBackButton";
 import createApolloClient from "../apollo-client";
 import { gql } from "@apollo/client";
+import Category from "../types/category";
 
-const Catalogue: React.FC<{ productCategories: any }> = ({
-  productCategories,
-}) => {
+const Catalogue: React.FC<{
+  productCategories: Category[];
+}> = ({ productCategories }) => {
   return (
     <div className="h-[1500px]">
       <h1>Catalogue</h1>
       <ul>
-        {productCategories.map((category: any) => (
-          <li key={category.attributes.name}>
-            <Link
-              href={`/catalogue/${category.attributes.name}-${category.id}`}
-            >
-              {category.attributes.name}
+        {productCategories.map(({ attributes }) => (
+          <li key={attributes.name}>
+            <Link href={`/catalogue/${attributes.slug}`}>
+              {attributes.name}
             </Link>
           </li>
         ))}
@@ -43,6 +42,7 @@ export const getServerSideProps = async () => {
                   }
                 }
                 name
+                slug
               }
               id
             }
