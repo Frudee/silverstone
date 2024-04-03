@@ -1,9 +1,10 @@
 import createApolloClient from "../../../apollo-client";
 import Category from "../../../types/category";
-import Product from "../../../types/product";
 import { gql } from "@apollo/client";
 
-export const getCategoryBySlug = async (categorySlug: string): Promise<any> => {
+export const getCategoryBySlug = async (
+  categorySlug: string
+): Promise<Category> => {
   const client = createApolloClient();
   try {
     const { data } = await client.query({
@@ -58,5 +59,6 @@ export const getCategoryBySlug = async (categorySlug: string): Promise<any> => {
     return category;
   } catch (err) {
     console.log(err);
+    throw new Error(`Error fetching category by slug`);
   }
 };
