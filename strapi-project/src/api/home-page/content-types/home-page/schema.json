@@ -40,6 +40,12 @@
       "type": "component",
       "repeatable": true,
       "component": "categories-home-page.categories-home-page"
+    },
+    "Feature": {
+      "displayName": "Feature",
+      "type": "component",
+      "repeatable": true,
+      "component": "features.feature"
     }
   }
 }

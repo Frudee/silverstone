@@ -16,10 +16,24 @@ export interface CategoriesHomePageCategoriesHomePage extends Schema.Component {
   };
 }
 
+export interface FeaturesFeature extends Schema.Component {
+  collectionName: 'components_features_features';
+  info: {
+    displayName: 'Feature';
+    icon: 'filter';
+  };
+  attributes: {
+    SVG: Attribute.Media;
+    title: Attribute.String;
+    description: Attribute.String;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'categories-home-page.categories-home-page': CategoriesHomePageCategoriesHomePage;
+      'features.feature': FeaturesFeature;
     }
   }
 }

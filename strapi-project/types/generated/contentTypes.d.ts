@@ -807,6 +807,7 @@ export interface ApiHomePageHomePage extends Schema.SingleType {
       'categories-home-page.categories-home-page',
       true
     >;
+    Feature: Attribute.Component<'features.feature', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

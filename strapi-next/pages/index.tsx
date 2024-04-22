@@ -1,8 +1,9 @@
 import Hero from "../components/index/Hero";
 import ProductSlider from "../components/index/ProductSlider";
-import { gql } from "@apollo/client";
-import createApolloClient from "../apollo-client";
 import Category from "../types/category";
+import Features from "../components/index/Features";
+import { getIndexPageData } from "../graphql/queries/indexPage/getIndexPageData";
+import { Feature } from "../types/feature";
 
 export type IndexPageProps = {
   productCategories: {
@@ -13,6 +14,7 @@ export type IndexPageProps = {
       attributes: {
         title: string;
         titleDesc: string;
+        Feature: Feature[];
       };
     };
   };
@@ -28,47 +30,15 @@ const IndexPage: React.FC<{
     <main>
       <Hero props={pageData.homePage.data.attributes} />
       <ProductSlider data={pageData.productCategories.data} />
+      <Features features={pageData.homePage.data.attributes.Feature} />
     </main>
   );
 };
 
 export const getStaticProps = async () => {
-  const client = createApolloClient();
   try {
-    const { data } = await client.query({
-      query: gql`
-        query ExampleQuery {
-          productCategories {
-            data {
-              attributes {
-                image {
-                  data {
-                    attributes {
-                      url
-                    }
-                  }
-                }
-                name
-                description
-              }
-            }
-          }
-          homePage {
-            data {
-              attributes {
-                title
-                titleDesc
-              }
-            }
-          }
-        }
-      `,
-    });
-    return {
-      props: {
-        pageData: data,
-      },
-    };
+    const data = await getIndexPageData();
+    return data;
   } catch (error) {
     console.error("Error fetching products:", error);
     throw new Error("Failed to fetch products");
