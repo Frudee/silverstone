@@ -24,3 +24,13 @@ html {
 /* .clip-image {
   clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0 100%);
 } */
+
+div .swiper-slide {
+  height: initial;
+}
+
+@media (min-width: 1024px) {
+  div .swiper-slide {
+    height: 100%;
+  }
+}

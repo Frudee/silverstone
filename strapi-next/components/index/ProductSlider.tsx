@@ -31,7 +31,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ data }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      <CTAButton text="Каталог" primary />
+      {/* <CTAButton text="Каталог" primary /> */}
     </section>
   );
 };
