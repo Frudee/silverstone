@@ -10,9 +10,9 @@ const Features: React.FC<FeaturesProps> = ({ features }) => {
   return (
     <section className="flex flex-col gap-8 px-4 lg:px-[10%] xl:px-[20%] text-sm">
       <Heading text="Наши преимущества" pageHeading={false} />
-      <div className="flex flex-col gap-4 lg:flex-row lg:gap-12">
-        {features.map(({ title, description, SVG }) => (
-          <div className="flex flex-col gap-4 items-center">
+      <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+        {features.map(({ title, description, SVG }, i) => (
+          <div className="flex flex-col gap-2 items-center text-center" key={i}>
             <Image
               src={`http://localhost:1337${SVG.data.attributes.url}`}
               alt="feature img"
@@ -20,7 +20,7 @@ const Features: React.FC<FeaturesProps> = ({ features }) => {
               height={50}
             />
             <span className="font-bold">{title}</span>
-            <span className="text-center">{description}</span>
+            <span className="text-gray-500">{description}</span>
           </div>
         ))}
       </div>

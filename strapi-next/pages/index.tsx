@@ -4,6 +4,7 @@ import Category from "../types/category";
 import Features from "../components/index/Features";
 import { getIndexPageData } from "../graphql/queries/indexPage/getIndexPageData";
 import { Feature } from "../types/feature";
+import News from "../components/index/News";
 
 export type IndexPageProps = {
   productCategories: {
@@ -31,6 +32,7 @@ const IndexPage: React.FC<{
       <Hero props={pageData.homePage.data.attributes} />
       <ProductSlider data={pageData.productCategories.data} />
       <Features features={pageData.homePage.data.attributes.Feature} />
+      <News />
     </main>
   );
 };
