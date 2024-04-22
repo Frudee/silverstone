@@ -10,7 +10,7 @@ const Hero: React.FC<{ props: HeroProps }> = ({ props }) => {
   return (
     <section
       style={{ backgroundImage: `url(${heroBg.src})` }}
-      className={` bg-cover lg:bg-center py-[75px] lg:pt-[150px] lg:pb-[200px] text-white px-4 lg:px-[20%] flex flex-col gap-24 `}
+      className={` bg-cover lg:bg-center py-[75px] lg:pt-[150px] lg:pb-[200px] text-white px-4 lg:px-[10%] xl:px-[20%] flex flex-col gap-24 `}
     >
       <div className="flex flex-col lg:items-center gap-[30px] lg:gap-[45px]">
         <h1 className="text-[30px] lg:text-[54px] tracking-wider lg:text-center">

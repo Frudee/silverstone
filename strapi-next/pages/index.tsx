@@ -2,20 +2,8 @@ import Hero from "../components/index/Hero";
 import ProductSlider from "../components/index/ProductSlider";
 import { gql } from "@apollo/client";
 import createApolloClient from "../apollo-client";
+import Category from "../types/category";
 
-export type Category = {
-  attributes: {
-    image: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      } | null;
-    };
-    name: string;
-    description: string | null;
-  };
-};
 export type IndexPageProps = {
   productCategories: {
     data: Category[];
