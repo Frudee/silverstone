@@ -21,8 +21,8 @@ const ProductSliderItem: React.FC<ProductSliderProps> = ({ props }) => {
       <div className="flex flex-col gap-7 lg:w-full ">
         <h4 className="text-2xl font-medium text-primary">{name}</h4>
         <span>{description}</span>
+        <CTAButton className="mt-auto" text="Узнать больше" />
       </div>
-      <CTAButton className="mt-auto" text="Узнать больше" />
     </div>
   );
 };
