@@ -17,7 +17,7 @@ const NEWS_DATA = [
 
 const News: React.FC = () => {
   return (
-    <section className="px-4 lg:px-[10%] xl:px-[20%]">
+    <section className="px-4 lg:px-[10%] xl:px-[20%] pb-[70px]">
       <Heading text="Новости" pageHeading={false} />
       <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-8 pt-12">
         {NEWS_DATA.map(({ title, desc }, i) => (

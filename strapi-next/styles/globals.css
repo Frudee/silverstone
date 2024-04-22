@@ -4,6 +4,7 @@
 
 html {
   font-family: "Montserrat";
+  line-height: inherit;
 }
 
 .slide-in-bar:before {
